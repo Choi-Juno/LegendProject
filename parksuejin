@@ -9,7 +9,9 @@
 <body>
     
 </body>
-</html><table>
+</html>
+<h1> 브런치 이렇게 쓰는 거 맞는 지 테스트합니다. <h1>
+<table>
     <tr>
         <th> 제목 셀</th>
         <td> 1행 2열</td>
