@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상식퀴즈</title>
+    <style>
+      @font-face {
+        font-family: "mainfont";
+        src: url("ROKAF\ Slab\ Serif\ Medium.ttf");
+      }
+
+      .cpy {
+        margin-top: 5%;
+        font-family: "mainfont";
+        font-size: 5%;
+      }
+
+      body {
+        background-color: aliceblue;
+        font-family: "mainfont";
+        font-size: 80%;
+        text-align: center;
+        padding: 50px;
+        user-select: none;
+      }
+
+      .mainbox {
+        background-color: white;
+        padding: 5%;
+        width: 80%;
+        height: 200px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(163, 163, 163);
+      }
+
+      .btn {
+        margin: 5px;
+        padding: 5px;
+        background-color: rgb(131, 203, 255);
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        font-family: "mainfont";
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+
+      .nxtbtn {
+        margin: auto;
+        padding: 5px;
+        background-color: rgb(131, 203, 255);
+        border: none;
+        border-radius: 5px;
+        width: 70px;
+        font-family: "mainfont";
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+
+      button:hover,
+      .ckbtn:hover {
+        background-color: rgb(105, 189, 249);
+      }
+
+      .quiz-box {
+        background-color: white;
+        padding: 5%;
+        width: 80%;
+        height: 200px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(163, 163, 163);
+      }
+
+      .ckbtn {
+        display: inline-block;
+        margin: auto;
+        padding: 5px;
+        background-color: rgb(131, 203, 255);
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        font-family: "mainfont";
+        font-size: 87%;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+
+      .check-box {
+        display: none;
+      }
+
+      .answer-section {
+        border-top: 1px solid rgb(149, 149, 149);
+        padding-top: 15px;
+      }
+
+      .answer {
+        display: none;
+        background-color: white;
+      }
+
+      .check-box:checked + .ckbtn + .answer {
+        display: block;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Home Page -->
+    <div id="home-page">
+      <div class="mainbox">
+        <h1>간단 상식 퀴즈</h1>
+        <p>당신의 상식을 5문제로 테스트 해봐요!</p>
+        <button class="btn" onclick="showDifficultyPage('easy')">쉬움</button>
+        <button class="btn" onclick="showDifficultyPage('normal')">보통</button>
+        <button class="btn" onclick="showDifficultyPage('hard')">어려움</button>
+      </div>
+    </div>
+
+    <!-- Difficulty Intro Pages -->
+    <div id="easy-page" class="hidden">
+      <div class="mainbox">
+        <p>문제는 총 5문제 입니다!</p>
+        <p>각 문제를 풀고 정답을 확인 후 <br />직접 점수계산을 해주세요!</p>
+        <button class="btn" onclick="showQuiz('easy', 1)">시작</button>
+      </div>
+    </div>
+
+    <div id="normal-page" class="hidden">
+      <div class="mainbox">
+        <p>문제는 총 5문제 입니다!</p>
+        <p>각 문제를 풀고 정답을 확인 후 <br />직접 점수계산을 해주세요!</p>
+        <button class="btn" onclick="showQuiz('normal', 1)">시작</button>
+      </div>
+    </div>
+
+    <div id="hard-page" class="hidden">
+      <div class="mainbox">
+        <p>문제는 총 5문제 입니다!</p>
+        <p>각 문제를 풀고 정답을 확인 후 <br />직접 점수계산을 해주세요!</p>
+        <button class="btn" onclick="showQuiz('hard', 1)">시작</button>
+      </div>
+    </div>
+
+    <!-- Quiz Pages -->
+    <!-- Easy Quizzes -->
+    <div id="easy-quiz-1" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>1. 태양계에서 가장 큰 행성은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-1" class="check-box" />
+          <label for="show-easy-1" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 목성</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 2)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-2" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>2. 우리나라의 수도는 어디인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-2" class="check-box" />
+          <label for="show-easy-2" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 서울</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 3)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-3" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>3. 물의 화학식은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-3" class="check-box" />
+          <label for="show-easy-3" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: H₂O</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 4)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-4" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>4. 세계에서 면적이 가장 넓은 나라는 어디인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-4" class="check-box" />
+          <label for="show-easy-4" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 러시아</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 5)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-5" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>5. 지구에서 가장 높은 산은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-5" class="check-box" />
+          <label for="show-easy-5" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 에베레스트 산</p>
+            <button class="nxtbtn" onclick="showEndPage()">끝</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Normal Quizzes -->
+    <div id="normal-quiz-1" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>1. 피타고라스의 정리를 수식으로 표현하면 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-normal-1" class="check-box" />
+          <label for="show-normal-1" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: a² + b² = c²</p>
+            <button class="nxtbtn" onclick="showQuiz('normal', 2)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="normal-quiz-2" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>2. 원소기호 'Au'는 어떤 원소를 나타내나요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-normal-2" class="check-box" />
+          <label for="show-normal-2" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 금(Gold)</p>
+            <button class="nxtbtn" onclick="showQuiz('normal', 3)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="normal-quiz-3" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>3. 1차 세계대전이 시작된 연도는 언제인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-normal-3" class="check-box" />
+          <label for="show-normal-3" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 1914년</p>
+            <button class="nxtbtn" onclick="showQuiz('normal', 4)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="normal-quiz-4" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>4. 인간의 정상 체온은 약 몇 도인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-normal-4" class="check-box" />
+          <label for="show-normal-4" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 36.5°C</p>
+            <button class="nxtbtn" onclick="showQuiz('normal', 5)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="normal-quiz-5" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>5. 함수 f(x) = x²의 도함수는 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-normal-5" class="check-box" />
+          <label for="show-normal-5" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: f'(x) = 2x</p>
+            <button class="nxtbtn" onclick="showEndPage()">끝</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hard Quizzes -->
+    <div id="hard-quiz-1" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>1. 프랑스 대혁명은 몇 년도에 시작되었나요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-hard-1" class="check-box" />
+          <label for="show-hard-1" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 1789년</p>
+            <button class="nxtbtn" onclick="showQuiz('hard', 2)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hard-quiz-2" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>2. DNA의 이중 나선 구조를 발견한 과학자들은 누구인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-hard-2" class="check-box" />
+          <label for="show-hard-2" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 제임스 왓슨과 프랜시스 크릭</p>
+            <button class="nxtbtn" onclick="showQuiz('hard', 3)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hard-quiz-3" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>
+            3. 아인슈타인의 특수 상대성 이론에서 에너지와 질량의 관계를 나타내는
+            공식은 무엇인가요?
+          </p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-hard-3" class="check-box" />
+          <label for="show-hard-3" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: E=mc²</p>
+            <button class="nxtbtn" onclick="showQuiz('hard', 4)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hard-quiz-4" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>4. 양자역학의 불확정성 원리를 제안한 물리학자는 누구인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-hard-4" class="check-box" />
+          <label for="show-hard-4" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 베르너 하이젠베르크</p>
+            <button class="nxtbtn" onclick="showQuiz('hard', 5)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hard-quiz-5" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>
+            5. 물리학에서 광자의 에너지를 그 주파수와 관련시키는 기본적인 상수를
+            무엇이라고 하나요?
+          </p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-hard-5" class="check-box" />
+          <label for="show-hard-5" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 플랑크 상수</p>
+            <button class="nxtbtn" onclick="showEndPage()">끝</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Page -->
+    <div id="end-page" class="hidden">
+      <div class="mainbox">
+        <h1>끝!</h1>
+        <p>수고하셨습니다.</p>
+        <p>당신의 상식수준에 만족하시나요?</p>
+        <button class="btn" onclick="showHomePage()">홈으로</button>
+      </div>
+    </div>
+
+    <p class="cpy">mady by CHO</p>
+
+    <script>
+      // Hide all pages
+      function hideAllPages() {
+        const pages = document.querySelectorAll(
+          'div[id$="-page"], div[id^="easy-quiz-"], div[id^="normal-quiz-"], div[id^="hard-quiz-"]'
+        );
+        pages.forEach((page) => {
+          page.classList.add("hidden");
+        });
+      }
+
+      // Show home page
+      function showHomePage() {
+        hideAllPages();
+        document.getElementById("home-page").classList.remove("hidden");
+
+        // Reset all checkboxes
+        const checkboxes = document.querySelectorAll(".check-box");
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = false;
+        });
+      }
+
+      // Show difficulty page
+      function showDifficultyPage(difficulty) {
+        hideAllPages();
+        document
+          .getElementById(`${difficulty}-page`)
+          .classList.remove("hidden");
+      }
+
+      // Show quiz page
+      function showQuiz(difficulty, number) {
+        hideAllPages();
+        document
+          .getElementById(`${difficulty}-quiz-${number}`)
+          .classList.remove("hidden");
+      }
+
+      // Show end page
+      function showEndPage() {
+        hideAllPages();
+        document.getElementById("end-page").classList.remove("hidden");
+      }
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", function () {
+        showHomePage();
+      });
+    </script>
+  </body>
+</html>
