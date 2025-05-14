@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "mainfont";
+  src: url("ROKAF\ Slab\ Serif\ Medium.ttf");
+}
+
+.cpy {
+  margin-top: 5%;
+  font-family: "mainfont";
+  font-size: 5%;
+}
+
+body {
+  background-color: aliceblue;
+  font-family: "mainfont";
+  font-size: 80%;
+  text-align: center;
+  padding: 50px;
+  user-select: none;
+}
+
+.mainbox {
+  background-color: white;
+  padding: 5%;
+  width: 80%;
+  height: 200px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(163, 163, 163);
+}
+
+.btn {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(131, 203, 255);
+  border: none;
+  border-radius: 5px;
+  width: 60px;
+  font-family: "mainfont";
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.nxtbtn {
+  margin: auto;
+  padding: 5px;
+  background-color: rgb(131, 203, 255);
+  border: none;
+  border-radius: 5px;
+  width: 70px;
+  font-family: "mainfont";
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+button:hover,
+.ckbtn:hover {
+  background-color: rgb(105, 189, 249);
+}
+
+.quiz-box {
+  background-color: white;
+  padding: 5%;
+  width: 80%;
+  height: 200px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgb(163, 163, 163);
+}
+
+.ckbtn {
+  display: inline-block;
+  margin: auto;
+  padding: 5px;
+  background-color: rgb(131, 203, 255);
+  border: none;
+  border-radius: 5px;
+  width: 60px;
+  font-family: "mainfont";
+  font-size: 87%;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.check-box {
+  display: none;
+}
+
+.answer-section {
+  border-top: 1px solid rgb(149, 149, 149);
+  padding-top: 15px;
+}
+
+.answer {
+  display: none;
+  background-color: white;
+}
+
+.check-box:checked + .ckbtn + .answer {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
