@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <!-- 문서의 기본 정보를 설정하는 부분 -->
     <meta charset="UTF-8" />
+    <!-- 한글을 포함한 문자를 표시하기 위한 문자 인코딩 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 모바일 기기에서 뷰포트 설정 -->
     <title>상식퀴즈</title>
+    <!-- 브라우저 탭에 표시되는 제목 -->
     <link rel="stylesheet" href="../css/index.css" />
+    <!-- CSS 파일 연결 -->
   </head>
   <body>
-    <!-- Home Page -->
+    <!-- 홈 페이지 - 난이도 선택 화면 -->
     <div id="home-page">
       <div class="mainbox">
         <h1>간단 상식 퀴즈</h1>
         <p>당신의 상식을 5문제로 테스트 해봐요!</p>
+        <!-- 난이도 선택 버튼들 - 클릭시 해당 난이도의 소개 페이지로 이동 -->
         <button class="btn" onclick="showDifficultyPage('easy')">쉬움</button>
         <button class="btn" onclick="showDifficultyPage('normal')">보통</button>
         <button class="btn" onclick="showDifficultyPage('hard')">어려움</button>
       </div>
     </div>
 
-    <!-- Difficulty Intro Pages -->
+    <!-- 난이도별 소개 페이지들 -->
+    <!-- 쉬움 난이도 소개 페이지 - 초기에는 hidden 클래스로 숨겨져 있음 -->
     <div id="easy-page" class="hidden">
       <div class="mainbox">
         <p>문제는 총 5문제 입니다!</p>
         <p>각 문제를 풀고 정답을 확인 후 <br />직접 점수계산을 해주세요!</p>
+        <!-- 시작 버튼 - 클릭시 첫 번째 문제로 이동 -->
         <button class="btn" onclick="showQuiz('easy', 1)">시작</button>
       </div>
     </div>
 
+    <!-- 보통 난이도 소개 페이지 -->
     <div id="normal-page" class="hidden">
       <div class="mainbox">
         <p>문제는 총 5문제 입니다!</p>
@@ -35,6 +44,7 @@
       </div>
     </div>
 
+    <!-- 어려움 난이도 소개 페이지 -->
     <div id="hard-page" class="hidden">
       <div class="mainbox">
         <p>문제는 총 5문제 입니다!</p>
@@ -43,18 +53,21 @@
       </div>
     </div>
 
-    <!-- Quiz Pages -->
-    <!-- Easy Quizzes -->
+    <!-- 퀴즈 페이지들 - 각 난이도별 5문제씩 -->
+    <!-- 쉬움 난이도 퀴즈들 -->
     <div id="easy-quiz-1" class="hidden">
       <div class="quiz-box">
         <div>
           <p>1. 태양계에서 가장 큰 행성은 무엇인가요?</p>
         </div>
         <div class="answer-section">
+          <!-- 정답 확인을 위한 체크박스와 라벨 -->
+          <!-- input과 label은 id와 for 속성으로 연결됨 -->
           <input type="checkbox" id="show-easy-1" class="check-box" />
           <label for="show-easy-1" class="ckbtn">정답 확인</label>
           <div class="answer">
             <p>정답: 목성</p>
+            <!-- 다음 문제로 이동하는 버튼 -->
             <button class="nxtbtn" onclick="showQuiz('easy', 2)">
               다음 문제
             </button>
@@ -127,13 +140,14 @@
           <label for="show-easy-5" class="ckbtn">정답 확인</label>
           <div class="answer">
             <p>정답: 에베레스트 산</p>
+            <!-- 마지막 문제이므로 종료 페이지로 이동 -->
             <button class="nxtbtn" onclick="showEndPage()">끝</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Normal Quizzes -->
+    <!-- 보통 난이도 퀴즈들 -->
     <div id="normal-quiz-1" class="hidden">
       <div class="quiz-box">
         <div>
@@ -222,7 +236,7 @@
       </div>
     </div>
 
-    <!-- Hard Quizzes -->
+    <!-- 어려움 난이도 퀴즈들 -->
     <div id="hard-quiz-1" class="hidden">
       <div class="quiz-box">
         <div>
@@ -317,17 +331,20 @@
       </div>
     </div>
 
-    <!-- End Page -->
+    <!-- 종료 페이지 -->
     <div id="end-page" class="hidden">
       <div class="mainbox">
         <h1>끝!</h1>
         <p>수고하셨습니다.</p>
         <p>당신의 상식수준에 만족하시나요?</p>
+        <!-- 홈 페이지로 돌아가는 버튼 -->
         <button class="btn" onclick="showHomePage()">홈으로</button>
       </div>
     </div>
 
+    <!-- 저작권 표시 -->
     <p class="cpy">mady by CHO</p>
+    <!-- 자바스크립트 파일 연결 -->
     <script src="../js/index.js"></script>
   </body>
 </html>
