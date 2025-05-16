@@ -46,10 +46,9 @@ function showEndPage() {
   document.getElementById("end-page").classList.remove("hidden"); // 종료 페이지만 표시
 }
 
-// 페이지 로드 시 초기화 함수
-// DOMContentLoaded 이벤트는 HTML 문서가 완전히 로드되고 파싱되었을 때 발생
-document.addEventListener("DOMContentLoaded", function () {
+// 앱 초기화 함수
+function initializeApp() {
   showHomePage(); // 페이지 로드 시 홈 페이지 표시
-});
+}
 
 // JavaScript 코드 끝
