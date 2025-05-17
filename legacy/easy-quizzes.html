@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>쉬움 난이도 퀴즈 - 상식 퀴즈</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+
+      [id^="easy-quiz-"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        background-color: #e8f5e9;
+        padding: 1rem;
+      }
+
+      .quiz-box {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .quiz-box p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .answer-section {
+        margin-top: 2rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+      }
+
+      .check-box {
+        display: none;
+      }
+
+      .ckbtn {
+        display: inline-block;
+        background-color: #4caf50;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+      }
+
+      .ckbtn:hover {
+        background-color: #388e3c;
+      }
+
+      .answer {
+        margin-top: 1.5rem;
+        display: none;
+        background-color: #f5f5f5;
+        padding: 1rem;
+        border-radius: 5px;
+        border-left: 4px solid #4caf50;
+      }
+
+      .answer p {
+        font-weight: bold;
+        color: #4caf50;
+        margin-bottom: 1rem;
+      }
+
+      .nxtbtn {
+        background-color: #2196f3;
+        border: none;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
+      }
+
+      .nxtbtn:hover {
+        background-color: #0b7dda;
+      }
+
+      .check-box:checked ~ .answer {
+        display: block;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 쉬움 난이도 퀴즈 컴포넌트 -->
+    <div id="easy-quiz-1" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>1. 태양계에서 가장 큰 행성은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-1" class="check-box" />
+          <label for="show-easy-1" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 목성</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 2)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-2" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>2. 우리나라의 수도는 어디인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-2" class="check-box" />
+          <label for="show-easy-2" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 서울</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 3)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-3" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>3. 물의 화학식은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-3" class="check-box" />
+          <label for="show-easy-3" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: H₂O</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 4)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-4" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>4. 세계에서 면적이 가장 넓은 나라는 어디인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-4" class="check-box" />
+          <label for="show-easy-4" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 러시아</p>
+            <button class="nxtbtn" onclick="showQuiz('easy', 5)">
+              다음 문제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="easy-quiz-5" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p>5. 지구에서 가장 높은 산은 무엇인가요?</p>
+        </div>
+        <div class="answer-section">
+          <input type="checkbox" id="show-easy-5" class="check-box" />
+          <label for="show-easy-5" class="ckbtn">정답 확인</label>
+          <div class="answer">
+            <p>정답: 에베레스트 산</p>
+            <button class="nxtbtn" onclick="showEndPage()">끝</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 퀴즈 진행 상황 추적 스크립트 (선택 사항)
+      function trackQuizProgress(difficulty, number) {
+        console.log(`${difficulty} 난이도 ${number}번 문제 표시됨`);
+      }
+    </script>
+  </body>
+</html>

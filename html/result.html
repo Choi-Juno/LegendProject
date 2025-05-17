@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 완료 - 상식 퀴즈</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      /* 헤더 스타일 */
+      header {
+        background-color: #2196f3;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      /* 결과 페이지 스타일 */
+      #result-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+      }
+
+      .mainbox {
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mainbox h1 {
+        color: #2196f3;
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+      }
+
+      .mainbox p {
+        color: #555;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+        line-height: 1.5;
+      }
+
+      .btn {
+        background-color: #2196f3;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        padding: 0.8rem 2rem;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn:hover {
+        background-color: #0d8bf2;
+        transform: scale(1.05);
+      }
+
+      /* 난이도별 배경 스타일 */
+      .easy-bg .mainbox {
+        background-color: #e3f2fd;
+      }
+
+      .normal-bg .mainbox {
+        background-color: #bbdefb;
+      }
+
+      .hard-bg .mainbox {
+        background-color: #90caf9;
+      }
+
+      /* 푸터 스타일 */
+      footer {
+        background-color: #f5f5f5;
+        padding: 1rem;
+        text-align: center;
+        margin-top: 2rem;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .cpy {
+        color: #777;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* 축하 효과 */
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: #f44336;
+        opacity: 0;
+        animation: confetti-fall 3s linear forwards;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(calc(100vh + 100px)) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <h1>상식퀴즈</h1>
+    </header>
+
+    <!-- 결과 페이지 -->
+    <div id="result-container">
+      <div class="mainbox">
+        <h1>끝!</h1>
+        <p>수고하셨습니다.</p>
+        <p id="level-message">당신의 상식수준에 만족하시나요?</p>
+        <!-- 홈 페이지로 돌아가는 버튼 -->
+        <a href="index.html" class="btn">홈으로</a>
+      </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <p class="cpy">made by CHO</p>
+    </footer>
+
+    <script>
+      // 페이지 로드 시 실행
+      document.addEventListener("DOMContentLoaded", function () {
+        // URL에서 난이도 매개변수 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const level = urlParams.get("level") || "easy"; // 기본값은 easy
+
+        // 컨테이너에 난이도 클래스 추가
+        const container = document.getElementById("result-container");
+        container.classList.add(`${level}-bg`);
+
+        // 난이도별 메시지 설정
+        const levelMessage = document.getElementById("level-message");
+        switch (level) {
+          case "easy":
+            levelMessage.textContent =
+              "쉬운 난이도를 완료했습니다! 다음엔 더 높은 난이도에 도전해보세요!";
+            break;
+          case "normal":
+            levelMessage.textContent =
+              "보통 난이도를 완료했습니다! 당신의 상식 수준은 꽤 괜찮네요!";
+            break;
+          case "hard":
+            levelMessage.textContent =
+              "어려운 난이도를 완료했습니다! 당신은 상식왕입니다!";
+            break;
+          default:
+            levelMessage.textContent =
+              "퀴즈를 모두 완료했습니다. 당신의 상식수준에 만족하시나요?";
+        }
+
+        // 축하 효과 생성
+        createConfetti();
+      });
+
+      // 축하 효과 함수
+      function createConfetti() {
+        const colors = [
+          "#f44336",
+          "#e91e63",
+          "#9c27b0",
+          "#673ab7",
+          "#3f51b5",
+          "#2196f3",
+          "#03a9f4",
+          "#00bcd4",
+          "#009688",
+          "#4caf50",
+          "#8bc34a",
+          "#cddc39",
+          "#ffeb3b",
+          "#ffc107",
+          "#ff9800",
+          "#ff5722",
+        ];
+
+        // 50개의 색종이 조각 생성
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.width = Math.random() * 10 + 5 + "px";
+            confetti.style.height = Math.random() * 10 + 5 + "px";
+            confetti.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+            document.body.appendChild(confetti);
+
+            // 애니메이션 종료 후 제거
+            setTimeout(() => {
+              confetti.remove();
+            }, 5000);
+          }, Math.random() * 3000); // 0~3초 사이에 랜덤하게 생성
+        }
+      }
+    </script>
+  </body>
+</html>

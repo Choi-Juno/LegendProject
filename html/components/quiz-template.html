@@ -1,19 +1,170 @@
-<!-- 퀴즈 템플릿 컴포넌트 -->
-<!-- 이 템플릿은 JavaScript에서 동적으로 내용을 채워 사용합니다 -->
-<div id="quiz-template" class="hidden">
-  <div class="quiz-box">
-    <div>
-      <p id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</p>
-    </div>
-    <div class="answer-section">
-      <!-- 정답 확인을 위한 체크박스와 라벨 -->
-      <input type="checkbox" id="show-answer" class="check-box" />
-      <label for="show-answer" class="ckbtn">정답 확인</label>
-      <div class="answer">
-        <p id="quiz-answer">정답이 여기에 표시됩니다.</p>
-        <!-- 다음 문제로 이동하는 버튼 -->
-        <button id="next-button" class="nxtbtn">다음 문제</button>
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 템플릿 - 상식 퀴즈</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+
+      #quiz-template {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding: 1rem;
+      }
+
+      .quiz-box {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .quiz-box p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .answer-section {
+        margin-top: 2rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+      }
+
+      #quiz-answer {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      #quiz-answer-button {
+        display: inline-block;
+        background-color: #4caf50;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+      }
+
+      #quiz-answer-button:hover {
+        background-color: #388e3c;
+      }
+
+      #quiz-answer-result {
+        margin-top: 1.5rem;
+        display: none;
+        background-color: #f5f5f5;
+        padding: 1rem;
+        border-radius: 5px;
+        border-left: 4px solid #4caf50;
+      }
+
+      #quiz-answer-result p {
+        font-weight: bold;
+        color: #4caf50;
+        margin-bottom: 1rem;
+      }
+
+      #quiz-answer-next {
+        background-color: #2196f3;
+        border: none;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
+      }
+
+      #quiz-answer-next:hover {
+        background-color: #0b7dda;
+      }
+
+      .show-result #quiz-answer-result {
+        display: block;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 난이도별 배경색 */
+      .difficulty-easy {
+        background-color: #e8f5e9;
+      }
+
+      .difficulty-normal {
+        background-color: #fffde7;
+      }
+
+      .difficulty-hard {
+        background-color: #ffebee;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 퀴즈 템플릿 컴포넌트 -->
+    <div id="quiz-template-page" class="hidden">
+      <div class="quiz-box">
+        <div>
+          <p id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</p>
+        </div>
+        <div class="answer-section">
+          <input
+            type="text"
+            name="quiz-answer"
+            id="quiz-answer"
+            placeholder="답변을 입력하세요..."
+          />
+          <button id="quiz-answer-button">정답 확인</button>
+          <div id="quiz-answer-result">
+            <p id="quiz-answer-feedback">정답입니다.</p>
+            <button id="quiz-answer-next">다음 문제</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <script>
+      // 퀴즈 기능을 위한 스크립트
+      function initQuizTemplate() {
+        console.log("퀴즈 템플릿 초기화");
+        // 이 함수는 component-loader.js에서 템플릿 로드 후 호출될 수 있습니다
+      }
+
+      // 정답 확인 기능 예시
+      document.addEventListener("DOMContentLoaded", function () {
+        const answerButton = document.getElementById("quiz-answer-button");
+        if (answerButton) {
+          answerButton.addEventListener("click", function () {
+            const quizTemplate = document.getElementById("quiz-template");
+            quizTemplate.classList.add("show-result");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
