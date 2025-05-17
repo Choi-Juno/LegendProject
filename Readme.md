@@ -1,140 +1,165 @@
-# 상식퀴즈 프로젝트 - 컴포넌트 구조 가이드
+# 상식퀴즈 프로젝트 - 페이지 기반 구조 가이드
 
 ## 📚 소개
 
-이 프로젝트는 HTML, CSS, JavaScript를 활용한 간단한 상식 퀴즈 웹 애플리케이션입니다. 코드는 **컴포넌트 기반 구조**로 설계되어 있어 유지보수와 확장이 용이합니다.
+이 프로젝트는 HTML, CSS, JavaScript를 활용한 간단한 상식 퀴즈 웹 애플리케이션입니다. 코드는 **페이지 기반 구조**로 설계되어 있어 이해하기 쉽고 확장이 용이합니다.
 
-## 🧩 컴포넌트란?
+## 🔄 컴포넌트에서 페이지 기반으로 변경
 
-컴포넌트는 웹 페이지의 독립적인 부분으로, 재사용 가능한 코드 블록입니다. 이 프로젝트에서는 각 기능별로 HTML 파일을 분리하여 컴포넌트화했습니다.
+이 프로젝트는 초기에 컴포넌트 기반으로 설계되었으나, 더 나은 사용자 경험과 직관적인
+이해를 위해 페이지 기반 구조로 변경되었습니다. 각 화면(홈, 난이도 소개, 퀴즈, 결과)이
+별도의 HTML 파일로 분리되어 있어, 더 전통적인 웹 사이트의 형태를 갖추게 되었습니다.
 
 ## 📁 프로젝트 구조
 
 ```
 LegendTeam/
 ├── html/
-│   ├── index.html          # 메인 HTML 파일
-│   └── components/         # 컴포넌트 폴더
-│       ├── header.html     # 헤더 컴포넌트
-│       ├── home.html       # 홈 페이지 컴포넌트
-│       ├── difficulty-intro.html  # 난이도 소개 페이지
-│       ├── quiz-template.html     # 퀴즈 템플릿
-│       ├── easy-quizzes.html      # 쉬움 난이도 퀴즈
-│       ├── normal-quizzes.html    # 보통 난이도 퀴즈
-│       ├── hard-quizzes.html      # 어려움 난이도 퀴즈
-│       ├── end.html         # 종료 페이지
-│       └── footer.html      # 푸터 컴포넌트
+│   ├── index.html        # 홈페이지
+│   ├── difficulty.html   # 난이도 소개 페이지
+│   ├── quiz.html         # 퀴즈 페이지
+│   └── result.html       # 결과 페이지
 ├── css/
-│   └── index.css           # 스타일시트
-└── js/
-    ├── index.js            # 메인 자바스크립트
-    └── component-loader.js # 컴포넌트 로딩 스크립트
+│   └── index.css         # 스타일시트
+├── js/
+│   ├── index.js          # 초기 페이지 스크립트
+│   ├── difficulty.js     # 난이도 페이지 스크립트
+│   ├── quiz.js           # 퀴즈 페이지 스크립트
+│   └── result.js         # 결과 페이지 스크립트
+└── JSON/
+    └── quizList.json     # 퀴즈 데이터 파일
 ```
 
-## 🔄 컴포넌트 작동 방식
+## 📝 페이지별 기능 설명
 
-1. **메인 HTML (index.html)**:
-   - 컴포넌트를 담을 컨테이너만 포함
-   - 각 컨테이너는 해당 컴포넌트를 로드하는 역할
+### 1. 홈페이지 (index.html)
+- 퀴즈 소개 및 난이도 선택 기능 제공
+- 세 가지 난이도(쉬움, 보통, 어려움) 선택 가능
+- URL 매개변수를 통해 난이도 전달
 
-2. **컴포넌트 로더 (component-loader.js)**:
-   - 페이지 로드 시 각 컴포넌트 파일을 불러옴
-   - Fetch API를 사용하여 HTML 파일을 비동기적으로 로드
+### 2. 난이도 소개 페이지 (difficulty.html)
+- 선택한 난이도에 대한 정보 표시
+- URL 매개변수(`level`)를 통해 선택된 난이도 확인 
+- 퀴즈 시작 및 홈으로 돌아가기 버튼 제공
 
-3. **메인 로직 (index.js)**:
-   - 페이지 전환 및 퀴즈 기능 구현
-   - 컴포넌트 로드 후 초기화 함수 실행
+### 3. 퀴즈 페이지 (quiz.html)
+- 난이도별 퀴즈 문제 표시 (JSON 파일에서 로드)
+- URL 매개변수(`level`, `question`)를 통해 난이도 및 문제 번호 관리
+- 사용자 답변 입력 및 정답 확인 기능
+- 애니메이션 효과로 정답/오답 시각적 피드백 제공
+- 진행 상황 표시 (진행 바, 문제 번호)
+- localStorage를 활용한 점수 관리
 
-## 🛠️ 컴포넌트 수정 방법
+### 4. 결과 페이지 (result.html)
+- 퀴즈 완료 후 결과 표시
+- 정답/오답 개수 및 정답률 시각화
+- 각 문제별 정답 여부 표시
+- 애니메이션 효과 (60% 이상 득점 시 축하 효과)
+- 홈으로 돌아가기 옵션 (localStorage 점수 초기화)
 
-### 1. 컴포넌트 내용 수정하기
+## 🛠️ 주요 기능 수정 방법
 
-특정 페이지나 기능을 수정하려면 해당 컴포넌트 파일만 수정하면 됩니다.
+### 1. 퀴즈 문제 추가/수정
 
-**예시: 홈 페이지 제목 변경**
-```html
-<!-- html/components/home.html -->
-<div id="home-page">
-  <div class="mainbox">
-    <h1>새로운 제목으로 변경!</h1>
-    <!-- 나머지 내용 -->
-  </div>
-</div>
-```
+퀴즈 문제는 `JSON/quizList.json` 파일에서 관리됩니다. 이 파일을 수정하여 문제를 추가하거나 변경할 수 있습니다.
 
-### 2. 새 컴포넌트 추가하기
-
-1. `html/components/` 폴더에 새 HTML 파일 생성
-2. `index.html`에 컨테이너 추가
-3. `component-loader.js`에 로딩 코드 추가
-
-**예시: 도움말 페이지 추가**
-```html
-<!-- html/components/help.html -->
-<div id="help-page" class="hidden">
-  <div class="mainbox">
-    <h1>도움말</h1>
-    <p>퀴즈 사용 방법에 대한 설명...</p>
-    <button class="btn" onclick="showHomePage()">홈으로</button>
-  </div>
-</div>
-```
-
-```html
-<!-- index.html에 컨테이너 추가 -->
-<div id="help-container"></div>
-```
-
-```javascript
-// component-loader.js에 로딩 코드 추가
-const helpContainer = document.getElementById("help-container");
-// ...
-loadComponent(helpContainer, "./components/help.html")
-```
-
-### 3. 페이지 전환 기능 추가하기
-
-`index.js`에 새 함수를 추가하여 페이지 전환 기능을 구현할 수 있습니다.
-
-```javascript
-// 도움말 페이지 표시 함수
-function showHelpPage() {
-  hideAllPages(); // 모든 페이지 숨기기
-  document.getElementById("help-page").classList.remove("hidden"); // 도움말 페이지만 표시
+```json
+{
+  "easy": [
+    {
+      "question": "1. 새로운 문제?",
+      "answer": "정답"
+    },
+    // 추가 문제...
+  ]
 }
 ```
 
-## 🎯 퀴즈 추가 방법
+### 2. 페이지 스타일 수정
 
-새로운 퀴즈를 추가하려면 해당 난이도의 퀴즈 컴포넌트 파일을 수정합니다.
+각 페이지는 자체 스타일을 가지고 있습니다. HTML 파일 내의 `<style>` 태그를 수정하거나 외부 CSS 파일을 연결하여 스타일을 변경할 수 있습니다.
 
-**예시: 쉬움 난이도에 퀴즈 추가**
-```html
-<!-- html/components/easy-quizzes.html에 추가 -->
-<div id="easy-quiz-6" class="hidden">
-  <div class="quiz-box">
-    <div>
-      <p>6. 새로운 퀴즈 질문?</p>
-    </div>
-    <div class="answer-section">
-      <input type="checkbox" id="show-easy-6" class="check-box" />
-      <label for="show-easy-6" class="ckbtn">정답 확인</label>
-      <div class="answer">
-        <p>정답: 새 정답</p>
-        <button class="nxtbtn" onclick="showQuiz('easy', 7)">다음 문제</button>
-      </div>
-    </div>
-  </div>
-</div>
+### 3. 점수 관리 시스템 수정
+
+점수는 `localStorage`를 통해 관리됩니다. 점수 관리 방식을 수정하려면 `quiz.js`의 `initializeScore` 및 `updateScore` 함수를 수정하세요.
+
+```javascript
+// 점수 초기화 함수
+function initializeScore(level) {
+  // 난이도별 점수 저장소 초기화
+  if (!localStorage.getItem(`${level}_score`)) {
+    localStorage.setItem(`${level}_score`, JSON.stringify({
+      correct: 0,
+      wrong: 0,
+      answers: [0, 0, 0, 0, 0] // 0: 미응답, 1: 정답, 2: 오답
+    }));
+  }
+}
 ```
 
-## 💡 컴포넌트 구조의 장점
+### 4. 애니메이션 효과 수정
 
-1. **모듈화**: 각 기능이 독립적인 파일로 분리되어 유지보수가 용이
-2. **재사용성**: 동일한 컴포넌트를 여러 곳에서 재사용 가능
-3. **가독성**: 코드가 기능별로 분리되어 이해하기 쉬움
-4. **협업**: 팀원들이 서로 다른 컴포넌트를 동시에 작업 가능
-5. **확장성**: 새로운 기능이나 페이지를 쉽게 추가 가능
+애니메이션 효과는 CSS와 JavaScript를 통해 구현됩니다. 정답/오답 애니메이션을 수정하려면 CSS의 애니메이션 정의와 관련 JavaScript 로직을 수정하세요.
+
+```css
+.correct-answer {
+  animation: correctPulse 0.5s forwards;
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); background-color: rgba(33, 150, 243, 0.1); }
+  100% { transform: scale(1); background-color: white; }
+}
+```
+
+## 🔄 URL 매개변수 활용
+
+이 프로젝트는 URL 매개변수를 통해 페이지 간 데이터를 전달합니다:
+
+1. **난이도 페이지**: `difficulty.html?level=easy`
+2. **퀴즈 페이지**: `quiz.html?level=normal&question=2`
+3. **결과 페이지**: `result.html?level=hard`
+
+이 구조를 통해 페이지 새로고침 후에도 상태가 유지되며, 북마크나 공유가 가능합니다.
+
+## 💾 데이터 관리
+
+### JSON 데이터 관리
+
+퀴즈 데이터는 `JSON/quizList.json` 파일에 저장되어 있습니다. 데이터를 비동기적으로 로드하여 사용합니다:
+
+```javascript
+async function fetchQuizData() {
+  try {
+    const response = await fetch('../JSON/quizList.json');
+    if (!response.ok) {
+      throw new Error('퀴즈 데이터를 불러오는데 실패했습니다.');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error:', error);
+    alert('퀴즈 데이터를 불러오는데 실패했습니다.');
+    window.location.href = 'index.html';
+    return null;
+  }
+}
+```
+
+### localStorage를 활용한 점수 관리
+
+사용자의 퀴즈 결과는 `localStorage`에 저장되어 세션 간에도 유지됩니다:
+
+- 각 난이도별 별도의 저장소 (`easy_score`, `normal_score`, `hard_score`)
+- 정답/오답 개수 및 각 문제별 정답 여부 추적
+- 결과 페이지에서 홈으로 이동 시 초기화 옵션 제공
+
+## 🎮 애니메이션 및 시각적 효과
+
+- 퀴즈 페이지에서 정답/오답 시 다른 애니메이션 효과
+- 결과 페이지에서 점수에 따른 축하 효과 (60% 이상)
+- 진행 바를 통한 진행 상황 시각화
+- 문제별 정답/오답 표시기
 
 ## 🚀 시작하기
 
@@ -144,17 +169,17 @@ function showHelpPage() {
 
 ## ⚠️ 주의사항
 
-- 컴포넌트 로더는 보안상의 이유로 로컬 파일 시스템(`file://`)에서는 작동하지 않을 수 있습니다. 웹 서버(로컬 개발 서버 포함)에서 실행해주세요.
-- 모든 컴포넌트 파일은 `html/components/` 폴더에 위치해야 합니다.
-- 컴포넌트 ID는 고유해야 하며, CSS 선택자와 JavaScript 코드에서 참조됩니다.
+- JSON 파일 로드를 위해 웹 서버(로컬 개발 서버 포함)에서 실행해야 합니다.
+- 최신 브라우저에서만 정상적으로 작동합니다.
+- 모바일 환경에서도 반응형으로 제작되었습니다.
 
 ## 📝 추가 개발 아이디어
 
-- 점수 시스템 추가하기
 - 타이머 기능 추가하기
 - 다양한 테마 지원하기
-- 사용자 프로필 및 점수 저장 기능
-- 더 많은 난이도와 카테고리 추가하기
+- 사용자 프로필 및 점수 저장 기능 확장
+- 더 많은 퀴즈 카테고리와 난이도 추가하기
+- 소셜 미디어 공유 기능 추가
 
 ---
 
