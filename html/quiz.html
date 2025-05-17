@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 - 상식 퀴즈</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      /* 헤더 스타일 */
+      header {
+        background-color: #2196f3;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      /* 퀴즈 페이지 스타일 */
+      .quiz-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding: 1rem;
+      }
+
+      .quiz-box {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .quiz-box p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .answer-section {
+        margin-top: 2rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+        padding-right: 1rem;
+      }
+
+      #quiz-answer {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      #quiz-answer-button {
+        display: inline-block;
+        background-color: #2196f3;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+      }
+
+      #quiz-answer-button:hover {
+        background-color: #0d8bf2;
+      }
+
+      #quiz-answer-result {
+        margin-top: 1.5rem;
+        display: none;
+        background-color: #f5f5f5;
+        padding: 1rem;
+        border-radius: 5px;
+        border-left: 4px solid #2196f3;
+      }
+
+      #quiz-answer-result p {
+        font-weight: bold;
+        color: #2196f3;
+        margin-bottom: 1rem;
+      }
+
+      #quiz-answer-next {
+        background-color: #64b5f6;
+        border: none;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
+        text-decoration: none;
+      }
+
+      #quiz-answer-next:hover {
+        background-color: #42a5f5;
+      }
+
+      .show-result #quiz-answer-result {
+        display: block;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 난이도별 배경색 */
+      .easy-bg {
+        background-color: #e3f2fd;
+      }
+
+      .normal-bg {
+        background-color: #bbdefb;
+      }
+
+      .hard-bg {
+        background-color: #90caf9;
+      }
+
+      /* 푸터 스타일 */
+      footer {
+        background-color: #f5f5f5;
+        padding: 1rem;
+        text-align: center;
+        margin-top: 2rem;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .cpy {
+        color: #777;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* 홈으로 버튼 */
+      .home-btn {
+        display: inline-block;
+        margin-top: 0.5rem;
+        background-color: #9e9e9e;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        transition: background-color 0.3s;
+      }
+
+      .home-btn:hover {
+        background-color: #757575;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <h1>상식퀴즈</h1>
+    </header>
+
+    <!-- 퀴즈 페이지 -->
+    <div id="quiz-container" class="quiz-container">
+      <div class="quiz-box">
+        <div>
+          <p id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</p>
+        </div>
+        <div class="answer-section">
+          <input
+            type="text"
+            name="quiz-answer"
+            id="quiz-answer"
+            placeholder="답변을 입력하세요..."
+          />
+          <button id="quiz-answer-button">정답 확인</button>
+          <div id="quiz-answer-result">
+            <p id="quiz-answer-feedback">정답입니다.</p>
+            <a href="#" id="quiz-answer-next">다음 문제</a>
+          </div>
+          <div style="margin-top: 1rem">
+            <a href="index.html" class="home-btn">홈으로</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <p class="cpy">made by CHO</p>
+    </footer>
+
+    <script>
+      // 퀴즈 데이터
+      const quizData = {
+        easy: [
+          {
+            question: "1. 태양계에서 가장 큰 행성은 무엇인가요?",
+            answer: "목성",
+          },
+          {
+            question: "2. 우리나라의 수도는 어디인가요?",
+            answer: "서울",
+          },
+          {
+            question: "3. 물의 화학식은 무엇인가요?",
+            answer: "H₂O",
+          },
+          {
+            question: "4. 세계에서 면적이 가장 넓은 나라는 어디인가요?",
+            answer: "러시아",
+          },
+          {
+            question: "5. 지구에서 가장 높은 산은 무엇인가요?",
+            answer: "에베레스트 산",
+          },
+        ],
+        normal: [
+          {
+            question: "1. 인간의 뇌에서 가장 큰 부분은 무엇인가요?",
+            answer: "대뇌",
+          },
+          {
+            question:
+              "2. 세계에서 사용하는 사람이 가장 많은 언어는 무엇인가요?",
+            answer: "중국어(만다린)",
+          },
+          {
+            question:
+              "3. 빛이 태양에서 지구까지 도달하는데 걸리는 시간은 약 몇 분인가요?",
+            answer: "8분",
+          },
+          {
+            question: "4. DNA의 이중 나선 구조를 발견한 과학자는 누구인가요?",
+            answer: "왓슨과 크릭",
+          },
+          {
+            question:
+              "5. 파이(π)의 근삿값으로 자주 사용되는 소수점 두 자리까지의 값은 얼마인가요?",
+            answer: "3.14",
+          },
+        ],
+        hard: [
+          {
+            question: "1. 원소 주기율표를 만든 과학자는 누구인가요?",
+            answer: "드미트리 멘델레예프",
+          },
+          {
+            question: "2. '상대성 이론'을 주장한 물리학자는 누구인가요?",
+            answer: "알베르트 아인슈타인",
+          },
+          {
+            question: "3. 1492년 아메리카 대륙을 발견한 탐험가는 누구인가요?",
+            answer: "크리스토퍼 콜럼버스",
+          },
+          {
+            question: "4. 프랑스 혁명이 일어난 연도는 언제인가요?",
+            answer: "1789년",
+          },
+          {
+            question: "5. 태양계에서 가장 작은 행성은 무엇인가요?",
+            answer: "수성",
+          },
+        ],
+      };
+
+      // 페이지 로드 시 실행
+      document.addEventListener("DOMContentLoaded", function () {
+        // URL에서 매개변수 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const level = urlParams.get("level") || "easy"; // 기본값은 easy
+        const questionNum = parseInt(urlParams.get("question") || "1"); // 기본값은 1
+
+        // 배경색 설정
+        const container = document.getElementById("quiz-container");
+        container.classList.add(`${level}-bg`);
+
+        // 문제 인덱스 (0부터 시작)
+        const questionIndex = questionNum - 1;
+
+        // 문제가 범위를 벗어나면 처리
+        if (questionIndex < 0 || questionIndex >= quizData[level].length) {
+          alert("존재하지 않는 문제입니다.");
+          window.location.href = "index.html";
+          return;
+        }
+
+        // 페이지 제목 업데이트
+        document.title = `${level} 난이도 - 문제 ${questionNum} - 상식 퀴즈`;
+
+        // 문제 내용 표시
+        const questionElement = document.getElementById("quiz-question");
+        questionElement.textContent = quizData[level][questionIndex].question;
+
+        // 다음 문제 링크 설정
+        const nextBtn = document.getElementById("quiz-answer-next");
+        if (questionIndex < 4) {
+          // 마지막 문제가 아니면 다음 문제로
+          nextBtn.href = `quiz.html?level=${level}&question=${questionNum + 1}`;
+        } else {
+          nextBtn.innerHTML = "결과 보기";
+          // 마지막 문제면 결과 페이지로
+          nextBtn.href = "result.html?level=" + level;
+        }
+
+        // 정답 확인 버튼 이벤트
+        const answerButton = document.getElementById("quiz-answer-button");
+        answerButton.addEventListener("click", function () {
+          checkAnswer(level, questionIndex);
+        });
+
+        // 입력 필드에 엔터키 이벤트
+        const answerInput = document.getElementById("quiz-answer");
+        answerInput.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            checkAnswer(level, questionIndex);
+          }
+        });
+
+        // 포커스 설정
+        setTimeout(() => answerInput.focus(), 100);
+      });
+
+      // 정답 확인 함수
+      function checkAnswer(level, questionIndex) {
+        const userAnswer = document.getElementById("quiz-answer").value.trim();
+        const correctAnswer = quizData[level][questionIndex].answer;
+        const answerFeedback = document.getElementById("quiz-answer-feedback");
+
+        // 정답 일치 여부 확인 (대소문자 무시)
+        const isCorrect =
+          userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+
+        // 피드백 메시지 설정
+        if (isCorrect) {
+          answerFeedback.textContent = "정답입니다!";
+          answerFeedback.style.color = "#2196F3"; // 파란색
+        } else {
+          answerFeedback.textContent = `오답입니다. 정답은 '${correctAnswer}'입니다.`;
+          answerFeedback.style.color = "#f44336"; // 빨간색
+        }
+
+        // 결과 표시
+        const container = document.getElementById("quiz-container");
+        container.classList.add("show-result");
+      }
+    </script>
+  </body>
+</html>
