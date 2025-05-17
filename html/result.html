@@ -61,6 +61,19 @@
         color: #2196f3;
         margin-bottom: 1.5rem;
         font-size: 2.5rem;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
 
       .mainbox p {
@@ -137,6 +150,106 @@
           opacity: 0;
         }
       }
+
+      /* 점수 카드 스타일 */
+      .score-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+        max-width: 300px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        animation: slideUp 0.7s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .score-title {
+        color: #2196f3;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .score-num {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2196f3;
+        margin: 0.5rem 0;
+      }
+
+      .score-details {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 1rem 0;
+      }
+
+      .score-item {
+        text-align: center;
+      }
+
+      .score-label {
+        font-size: 0.9rem;
+        color: #757575;
+      }
+
+      .score-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .score-value.correct {
+        color: #2196f3;
+      }
+
+      .score-value.wrong {
+        color: #f44336;
+      }
+
+      .question-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 1rem 0;
+      }
+
+      .question-indicator {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #e0e0e0;
+      }
+
+      .question-indicator.correct {
+        background-color: #2196f3;
+        animation: popIn 0.5s;
+      }
+
+      .question-indicator.wrong {
+        background-color: #f44336;
+        animation: popIn 0.5s;
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
     </style>
   </head>
   <body>
@@ -151,8 +264,28 @@
         <h1>끝!</h1>
         <p>수고하셨습니다.</p>
         <p id="level-message">당신의 상식수준에 만족하시나요?</p>
+
+        <!-- 결과 점수 카드 -->
+        <div class="score-card">
+          <div class="score-title">퀴즈 결과</div>
+          <div id="score-percentage" class="score-num">0%</div>
+          <div class="question-indicators" id="question-indicators">
+            <!-- 동적으로 생성될 문제 표시기들 -->
+          </div>
+          <div class="score-details">
+            <div class="score-item">
+              <div class="score-label">정답</div>
+              <div id="correct-count" class="score-value correct">0</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">오답</div>
+              <div id="wrong-count" class="score-value wrong">0</div>
+            </div>
+          </div>
+        </div>
+
         <!-- 홈 페이지로 돌아가는 버튼 -->
-        <a href="index.html" class="btn">홈으로</a>
+        <a href="index.html" class="btn" id="home-btn">홈으로</a>
       </div>
     </div>
 
@@ -160,84 +293,6 @@
     <footer>
       <p class="cpy">made by CHO</p>
     </footer>
-
-    <script>
-      // 페이지 로드 시 실행
-      document.addEventListener("DOMContentLoaded", function () {
-        // URL에서 난이도 매개변수 가져오기
-        const urlParams = new URLSearchParams(window.location.search);
-        const level = urlParams.get("level") || "easy"; // 기본값은 easy
-
-        // 컨테이너에 난이도 클래스 추가
-        const container = document.getElementById("result-container");
-        container.classList.add(`${level}-bg`);
-
-        // 난이도별 메시지 설정
-        const levelMessage = document.getElementById("level-message");
-        switch (level) {
-          case "easy":
-            levelMessage.textContent =
-              "쉬운 난이도를 완료했습니다! 다음엔 더 높은 난이도에 도전해보세요!";
-            break;
-          case "normal":
-            levelMessage.textContent =
-              "보통 난이도를 완료했습니다! 당신의 상식 수준은 꽤 괜찮네요!";
-            break;
-          case "hard":
-            levelMessage.textContent =
-              "어려운 난이도를 완료했습니다! 당신은 상식왕입니다!";
-            break;
-          default:
-            levelMessage.textContent =
-              "퀴즈를 모두 완료했습니다. 당신의 상식수준에 만족하시나요?";
-        }
-
-        // 축하 효과 생성
-        createConfetti();
-      });
-
-      // 축하 효과 함수
-      function createConfetti() {
-        const colors = [
-          "#f44336",
-          "#e91e63",
-          "#9c27b0",
-          "#673ab7",
-          "#3f51b5",
-          "#2196f3",
-          "#03a9f4",
-          "#00bcd4",
-          "#009688",
-          "#4caf50",
-          "#8bc34a",
-          "#cddc39",
-          "#ffeb3b",
-          "#ffc107",
-          "#ff9800",
-          "#ff5722",
-        ];
-
-        // 50개의 색종이 조각 생성
-        for (let i = 0; i < 50; i++) {
-          setTimeout(() => {
-            const confetti = document.createElement("div");
-            confetti.className = "confetti";
-            confetti.style.left = Math.random() * 100 + "vw";
-            confetti.style.width = Math.random() * 10 + 5 + "px";
-            confetti.style.height = Math.random() * 10 + 5 + "px";
-            confetti.style.backgroundColor =
-              colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-
-            document.body.appendChild(confetti);
-
-            // 애니메이션 종료 후 제거
-            setTimeout(() => {
-              confetti.remove();
-            }, 5000);
-          }, Math.random() * 3000); // 0~3초 사이에 랜덤하게 생성
-        }
-      }
-    </script>
+    <script src="../js/result.js"></script>
   </body>
 </html>

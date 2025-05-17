@@ -44,6 +44,18 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .quiz-box p {
@@ -67,6 +79,13 @@
         border: 1px solid #ddd;
         border-radius: 5px;
         font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      #quiz-answer:focus {
+        border-color: #2196f3;
+        box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+        outline: none;
       }
 
       #quiz-answer-button {
@@ -77,12 +96,17 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
         font-size: 1rem;
       }
 
       #quiz-answer-button:hover {
         background-color: #0d8bf2;
+        transform: translateY(-2px);
+      }
+
+      #quiz-answer-button:active {
+        transform: translateY(0);
       }
 
       #quiz-answer-result {
@@ -108,12 +132,17 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 0.9rem;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
         text-decoration: none;
       }
 
       #quiz-answer-next:hover {
         background-color: #42a5f5;
+        transform: translateY(-2px);
+      }
+
+      #quiz-answer-next:active {
+        transform: translateY(0);
       }
 
       .show-result #quiz-answer-result {
@@ -129,6 +158,43 @@
         to {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      .correct-answer {
+        animation: correctPulse 0.5s forwards;
+      }
+
+      @keyframes correctPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+          background-color: rgba(33, 150, 243, 0.1);
+        }
+        100% {
+          transform: scale(1);
+          background-color: white;
+        }
+      }
+
+      .wrong-answer {
+        animation: wrongShake 0.5s forwards;
+      }
+
+      @keyframes wrongShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20%,
+        60% {
+          transform: translateX(-5px);
+        }
+        40%,
+        80% {
+          transform: translateX(5px);
         }
       }
 
@@ -170,11 +236,38 @@
         padding: 0.5rem 1rem;
         border-radius: 5px;
         font-size: 0.9rem;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
       }
 
       .home-btn:hover {
         background-color: #757575;
+        transform: translateY(-2px);
+      }
+
+      .home-btn:active {
+        transform: translateY(0);
+      }
+
+      .progress-container {
+        margin-bottom: 1.5rem;
+        background-color: #e0e0e0;
+        border-radius: 10px;
+        height: 10px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background-color: #2196f3;
+        width: 0%;
+        transition: width 0.5s ease;
+      }
+
+      .question-counter {
+        text-align: right;
+        font-size: 0.9rem;
+        color: #757575;
+        margin-bottom: 0.5rem;
       }
     </style>
   </head>
@@ -187,6 +280,12 @@
     <!-- 퀴즈 페이지 -->
     <div id="quiz-container" class="quiz-container">
       <div class="quiz-box">
+        <div class="question-counter">
+          문제 <span id="current-question">1</span>/5
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
         <div>
           <p id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</p>
         </div>
@@ -213,162 +312,6 @@
     <footer>
       <p class="cpy">made by CHO</p>
     </footer>
-
-    <script>
-      // 퀴즈 데이터
-      const quizData = {
-        easy: [
-          {
-            question: "1. 태양계에서 가장 큰 행성은 무엇인가요?",
-            answer: "목성",
-          },
-          {
-            question: "2. 우리나라의 수도는 어디인가요?",
-            answer: "서울",
-          },
-          {
-            question: "3. 물의 화학식은 무엇인가요?",
-            answer: "H₂O",
-          },
-          {
-            question: "4. 세계에서 면적이 가장 넓은 나라는 어디인가요?",
-            answer: "러시아",
-          },
-          {
-            question: "5. 지구에서 가장 높은 산은 무엇인가요?",
-            answer: "에베레스트 산",
-          },
-        ],
-        normal: [
-          {
-            question: "1. 인간의 뇌에서 가장 큰 부분은 무엇인가요?",
-            answer: "대뇌",
-          },
-          {
-            question:
-              "2. 세계에서 사용하는 사람이 가장 많은 언어는 무엇인가요?",
-            answer: "중국어(만다린)",
-          },
-          {
-            question:
-              "3. 빛이 태양에서 지구까지 도달하는데 걸리는 시간은 약 몇 분인가요?",
-            answer: "8분",
-          },
-          {
-            question: "4. DNA의 이중 나선 구조를 발견한 과학자는 누구인가요?",
-            answer: "왓슨과 크릭",
-          },
-          {
-            question:
-              "5. 파이(π)의 근삿값으로 자주 사용되는 소수점 두 자리까지의 값은 얼마인가요?",
-            answer: "3.14",
-          },
-        ],
-        hard: [
-          {
-            question: "1. 원소 주기율표를 만든 과학자는 누구인가요?",
-            answer: "드미트리 멘델레예프",
-          },
-          {
-            question: "2. '상대성 이론'을 주장한 물리학자는 누구인가요?",
-            answer: "알베르트 아인슈타인",
-          },
-          {
-            question: "3. 1492년 아메리카 대륙을 발견한 탐험가는 누구인가요?",
-            answer: "크리스토퍼 콜럼버스",
-          },
-          {
-            question: "4. 프랑스 혁명이 일어난 연도는 언제인가요?",
-            answer: "1789년",
-          },
-          {
-            question: "5. 태양계에서 가장 작은 행성은 무엇인가요?",
-            answer: "수성",
-          },
-        ],
-      };
-
-      // 페이지 로드 시 실행
-      document.addEventListener("DOMContentLoaded", function () {
-        // URL에서 매개변수 가져오기
-        const urlParams = new URLSearchParams(window.location.search);
-        const level = urlParams.get("level") || "easy"; // 기본값은 easy
-        const questionNum = parseInt(urlParams.get("question") || "1"); // 기본값은 1
-
-        // 배경색 설정
-        const container = document.getElementById("quiz-container");
-        container.classList.add(`${level}-bg`);
-
-        // 문제 인덱스 (0부터 시작)
-        const questionIndex = questionNum - 1;
-
-        // 문제가 범위를 벗어나면 처리
-        if (questionIndex < 0 || questionIndex >= quizData[level].length) {
-          alert("존재하지 않는 문제입니다.");
-          window.location.href = "index.html";
-          return;
-        }
-
-        // 페이지 제목 업데이트
-        document.title = `${level} 난이도 - 문제 ${questionNum} - 상식 퀴즈`;
-
-        // 문제 내용 표시
-        const questionElement = document.getElementById("quiz-question");
-        questionElement.textContent = quizData[level][questionIndex].question;
-
-        // 다음 문제 링크 설정
-        const nextBtn = document.getElementById("quiz-answer-next");
-        if (questionIndex < 4) {
-          // 마지막 문제가 아니면 다음 문제로
-          nextBtn.href = `quiz.html?level=${level}&question=${questionNum + 1}`;
-        } else {
-          nextBtn.innerHTML = "결과 보기";
-          // 마지막 문제면 결과 페이지로
-          nextBtn.href = "result.html?level=" + level;
-        }
-
-        // 정답 확인 버튼 이벤트
-        const answerButton = document.getElementById("quiz-answer-button");
-        answerButton.addEventListener("click", function () {
-          checkAnswer(level, questionIndex);
-        });
-
-        // 입력 필드에 엔터키 이벤트
-        const answerInput = document.getElementById("quiz-answer");
-        answerInput.addEventListener("keydown", function (event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            checkAnswer(level, questionIndex);
-          }
-        });
-
-        // 포커스 설정
-        setTimeout(() => answerInput.focus(), 100);
-      });
-
-      // 정답 확인 함수
-      function checkAnswer(level, questionIndex) {
-        const userAnswer = document.getElementById("quiz-answer").value.trim();
-        const correctAnswer = quizData[level][questionIndex].answer;
-        const answerFeedback = document.getElementById("quiz-answer-feedback");
-
-        // 정답 일치 여부 확인 (대소문자 무시)
-        const isCorrect =
-          userAnswer.toLowerCase() === correctAnswer.toLowerCase();
-
-        // 피드백 메시지 설정
-        if (isCorrect) {
-          answerFeedback.textContent = "정답입니다!";
-          answerFeedback.style.color = "#2196F3"; // 파란색
-        } else {
-          answerFeedback.textContent = `오답입니다. 정답은 '${correctAnswer}'입니다.`;
-          answerFeedback.style.color = "#f44336"; // 빨간색
-        }
-
-        // 결과 표시
-        const container = document.getElementById("quiz-container");
-        container.classList.add("show-result");
-      }
-    </script>
+    <script src="../js/quiz.js"></script>
   </body>
 </html>
