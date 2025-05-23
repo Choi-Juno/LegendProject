@@ -115,32 +115,32 @@ footer {
   margin: 0;
 }
 
-.subject{
+.subject {
   display: inline-block;
   width: 100px;
   margin: 10px;
   background-color: white;
-  border:2px none #0d8bf2;
+  border: 2px none #0d8bf2;
   background-color: #0d8bf2;
-  border-radius:35px;
+  border-radius: 35px;
   font-size: 1em;
   text-align: center;
 }
-.subject_button{
+.subject_button {
   font-size: 20px;
   padding: 10px;
   background-color: #0d8bf2;
   color: white;
 
   border-style: none;
-} 
-.Categole_center{
-  display: flex;
-  flex-direction: column;   
-  justify-content: center;    
-  align-items: center;       
 }
-.Categole{
+.CategoryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Category {
   /*ani*/
   padding: 5px;
   display: flex;
@@ -155,8 +155,7 @@ footer {
   color: black;
   font-size: 1em;
   margin-bottom: 10px;
-
 }
-.Categole[hidden] {
+.Category[hidden] {
   display: none !important;
 }
