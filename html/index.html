@@ -19,6 +19,7 @@
       <h1>상식퀴즈</h1>
     </header>
 
+
     <!-- 홈 페이지 -->
     <div id="home-page">
       <div class="mainbox">
@@ -42,6 +43,24 @@
             ></span>
             어려움
           </a>
+        </div>
+        <div>
+         <!-- 주제를 바꾸는 코드 -->
+        <input type="text"  id="my" class="subject">
+        <button class ="subject_button" onclick="document.getElementById('my').value = getValue();">></button>
+            <script>
+            let i=-1;
+
+            function getValue(){
+              const quiz1 = ['우주','동물','음료']
+              i+=1;
+              if(i >= quiz1.length){
+                i=0;
+              }
+              return quiz1[i];
+                            
+            }
+          </script>
         </div>
       </div>
     </div>
