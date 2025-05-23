@@ -61,7 +61,7 @@ function checkAnswer(level, questionIndex, quizData) {
   const userAnswer = document.getElementById("quiz-answer").value.trim();
   const correctAnswer = quizData[level][questionIndex].answer;
   const answerFeedback = document.getElementById("quiz-answer-feedback");
-  const quiz_question = document.getElementById("quiz-question")
+  const quiz_question = document.getElementById("quiz-question");
   const quizBox = document.querySelector(".quiz-box");
 
   // 이미 답변했는지 확인
@@ -70,8 +70,12 @@ function checkAnswer(level, questionIndex, quizData) {
     return; // 이미 정답을 확인한 경우 함수 종료
   }
 
-  // 정답 일치 여부 확인 (대소문자 무시)
-  const isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+  // 정답 일치 여부 확인 (대소문자 무시, 배열 지원)
+  const isCorrect = Array.isArray(correctAnswer)
+    ? correctAnswer.some(
+        (ans) => userAnswer.toLowerCase() === ans.toLowerCase()
+      )
+    : userAnswer.toLowerCase() === String(correctAnswer).toLowerCase();
 
   // 점수 업데이트
   updateScore(level, questionIndex, isCorrect);
@@ -84,12 +88,15 @@ function checkAnswer(level, questionIndex, quizData) {
   if (isCorrect) {
     answerFeedback.textContent = "정답입니다!";
     answerFeedback.style.color = "#2196F3"; // 파란색
-    quiz_question.style.backgroundColor = "#2196F3" // 여기 수정함
+    quiz_question.style.backgroundColor = "#2196F3"; // 여기 수정함
     quizBox.classList.add("correct-answer");
   } else {
-    answerFeedback.textContent = `오답입니다. 정답은 '${correctAnswer}'입니다.`;
+    const answerText = Array.isArray(correctAnswer)
+      ? correctAnswer.join(", ")
+      : correctAnswer;
+    answerFeedback.textContent = `오답입니다. 정답은 '${answerText}'입니다.`;
     answerFeedback.style.color = "#f44336"; // 빨간색
-    quiz_question.style.backgroundColor = "#f44336" // 여기 수정함
+    quiz_question.style.backgroundColor = "#f44336"; // 여기 수정함
 
     quizBox.classList.add("wrong-answer");
   }
