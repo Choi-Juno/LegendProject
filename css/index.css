@@ -116,15 +116,47 @@ footer {
 }
 
 .subject{
-  margin-top: 10px;
-  padding: 10px;
+  display: inline-block;
+  width: 100px;
+  margin: 10px;
   background-color: white;
-  border:1px solid #0d8bf2;
-  border-radius:15px;
-  color: #0d8bf2;
+  border:2px none #0d8bf2;
+  background-color: #0d8bf2;
+  border-radius:35px;
+  font-size: 1em;
+  text-align: center;
 }
 .subject_button{
-  background-color: white;
-  border: 1px solid #777;
+  font-size: 20px;
   padding: 10px;
+  background-color: #0d8bf2;
+  color: white;
+
+  border-style: none;
+} 
+.Categole_center{
+  display: flex;
+  flex-direction: column;   
+  justify-content: center;    
+  align-items: center;       
+}
+.Categole{
+  /*ani*/
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  border: 2px rgb(194, 194, 194) solid;
+  width: 100px;
+  color: black;
+  font-size: 1em;
+  margin-bottom: 10px;
+
+}
+.Categole[hidden] {
+  display: none !important;
 }

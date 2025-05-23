@@ -25,6 +25,30 @@
         <h1>간단 상식 퀴즈</h1>
         <p>당신의 상식을 5문제로 테스트 해봐요!</p>
         <!-- 난이도 선택 버튼들 - 클릭시 해당 난이도의 소개 페이지로 이동 -->
+        <div class="subject">
+          <button
+            type="text"
+            id="my"
+            class="subject_button"
+            onclick="showCategory()"
+          >
+            주제
+          </button>
+        </div>
+        <div hidden class="Categole_center">
+          <label hidden class="Categole">우주</label>
+          <label hidden class="Categole">과일</label>
+          <label hidden class="Categole">상식</label>
+        </div>
+        <script>
+          const labels = document.querySelectorAll(".Categole");
+          labels.forEach((label) => (label.hidden = true));
+          function showCategory() {
+            labels.forEach((label) => {
+              label.hidden = !label.hidden; // 숨김 상태 반전 (토글)
+            });
+          }
+        </script>
         <div class="btn-container">
           <a href="difficulty.html?level=easy" class="btn">
             <span class="icon-stars"><i class="fas fa-star"></i></span> 쉬움
@@ -50,8 +74,20 @@
             class="subject_button"
             onclick="document.getElementById('my').value = getValue();"
           >
-            <i class="fas fa-arrow-right"></i>
+            >
           </button>
+          <script>
+            let i = -1;
+
+            function getValue() {
+              const quiz1 = ["우주", "동물", "음료"];
+              i += 1;
+              if (i >= quiz1.length) {
+                i = 0;
+              }
+              return quiz1[i];
+            }
+          </script>
         </div>
       </div>
     </div>
