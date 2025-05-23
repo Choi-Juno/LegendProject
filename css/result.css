@@ -1,0 +1,245 @@
+/* 기본 스타일 */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* 헤더 스타일 */
+header {
+  background-color: #2196f3;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* 결과 페이지 스타일 */
+#result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.mainbox {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainbox h1 {
+  color: #2196f3;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mainbox p {
+  color: #555;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.btn {
+  background-color: #2196f3;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #0d8bf2;
+  transform: scale(1.05);
+}
+
+/* 난이도별 배경 스타일 */
+.easy-bg .mainbox {
+  background-color: #e3f2fd;
+}
+
+.normal-bg .mainbox {
+  background-color: #bbdefb;
+}
+
+.hard-bg .mainbox {
+  background-color: #90caf9;
+}
+
+/* 푸터 스타일 */
+footer {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cpy {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* 축하 효과 */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #f44336;
+  opacity: 0;
+  animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* 점수 카드 스타일 */
+.score-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 300px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.7s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.score-title {
+  color: #2196f3;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.score-num {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2196f3;
+  margin: 0.5rem 0;
+}
+
+.score-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.score-item {
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: #757575;
+}
+
+.score-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.score-value.correct {
+  color: #2196f3;
+}
+
+.score-value.wrong {
+  color: #f44336;
+}
+
+.question-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.question-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+}
+
+.question-indicator.correct {
+  background-color: #2196f3;
+  animation: popIn 0.5s;
+}
+
+.question-indicator.wrong {
+  background-color: #f44336;
+  animation: popIn 0.5s;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

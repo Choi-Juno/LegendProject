@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 - 상식 퀴즈</title>
+    <link rel="stylesheet" href="../css/quiz.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <h1>상식퀴즈</h1>
+    </header>
+
+    <!-- 퀴즈 페이지 -->
+    <div id="quiz-container" class="quiz-container">
+      <div class="quiz-box">
+        <div class="question-counter">
+          문제 <span id="current-question">1</span>/5
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div>
+          <p id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</p>
+        </div>
+        <div class="answer-section">
+          <input
+            type="text"
+            name="quiz-answer"
+            id="quiz-answer"
+            placeholder="답변을 입력하세요..."
+          />
+          <button id="quiz-answer-button">정답 확인</button>
+          <div id="quiz-answer-result">
+            <p id="quiz-answer-feedback">정답입니다.</p>
+            <a href="#" id="quiz-answer-next">다음 문제</a>
+          </div>
+          <div style="margin-top: 1rem">
+            <a href="index.html" class="home-btn">홈으로</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <p class="cpy">All rights reserved. 2025 LegendTeam</p>
+      <p class="cpy">최준오, 조준혁, 박수진, 서훈성, 황인성</p>
+    </footer>
+    <script src="../js/quiz.js"></script>
+  </body>
+</html>

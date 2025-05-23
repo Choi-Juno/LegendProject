@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>퀴즈 완료 - 상식 퀴즈</title>
+    <link rel="stylesheet" href="../css/result.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <h1>상식퀴즈</h1>
+    </header>
+
+    <!-- 결과 페이지 -->
+    <div id="result-container">
+      <div class="mainbox">
+        <h1>끝!</h1>
+        <p>수고하셨습니다.</p>
+        <p id="level-message">당신의 상식수준에 만족하시나요?</p>
+
+        <!-- 결과 점수 카드 -->
+        <div class="score-card">
+          <div class="score-title">퀴즈 결과</div>
+          <div id="score-percentage" class="score-num">0%</div>
+          <div class="question-indicators" id="question-indicators">
+            <!-- 동적으로 생성될 문제 표시기들 -->
+          </div>
+          <div class="score-details">
+            <div class="score-item">
+              <div class="score-label">정답</div>
+              <div id="correct-count" class="score-value correct">0</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">오답</div>
+              <div id="wrong-count" class="score-value wrong">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 홈 페이지로 돌아가는 버튼 -->
+        <a href="index.html" class="btn" id="home-btn">홈으로</a>
+      </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+      <p class="cpy">All rights reserved. 2025 LegendTeam</p>
+      <p class="cpy">최준오, 조준혁, 박수진, 서훈성, 황인성</p>
+    </footer>
+    <script src="../js/result.js"></script>
+  </body>
+</html>

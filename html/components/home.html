@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈 - 간단 상식 퀴즈</title>
+    <style>
+      #home-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+      }
+
+      .mainbox {
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .mainbox h1 {
+        color: #333;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+
+      .mainbox p {
+        color: #666;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s;
+        flex: 0 1 auto;
+      }
+
+      .btn:hover {
+        background-color: #388e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 홈 페이지 컴포넌트 - 난이도 선택 화면 -->
+    <div id="home-page">
+      <div class="mainbox">
+        <h1>간단 상식 퀴즈</h1>
+        <p>당신의 상식을 5문제로 테스트 해봐요!</p>
+        <!-- 난이도 선택 버튼들 - 클릭시 해당 난이도의 소개 페이지로 이동 -->
+        <div class="btn-container">
+          <button class="btn" onclick="showDifficultyPage('easy')">쉬움</button>
+          <button class="btn" onclick="showDifficultyPage('normal')">
+            보통
+          </button>
+          <button class="btn" onclick="showDifficultyPage('hard')">
+            어려움
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

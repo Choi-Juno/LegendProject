@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>종료 페이지 - 상식 퀴즈</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+
+      #end-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+      }
+
+      .mainbox {
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mainbox h1 {
+        color: #4caf50;
+        margin-bottom: 1.5rem;
+        font-size: 2.5rem;
+      }
+
+      .mainbox p {
+        color: #555;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+        line-height: 1.5;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+        padding: 0.8rem 2rem;
+        transition: all 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #388e3c;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 종료 페이지 컴포넌트 -->
+    <div id="end-page" class="hidden">
+      <div class="mainbox">
+        <h1>끝!</h1>
+        <p>수고하셨습니다.</p>
+        <p>당신의 상식수준에 만족하시나요?</p>
+        <!-- 홈 페이지로 돌아가는 버튼 -->
+        <button class="btn" onclick="showHomePage()">홈으로</button>
+      </div>
+    </div>
+
+    <script>
+      // 종료 페이지가 표시될 때 실행될 스크립트
+      function endPageShown() {
+        console.log("종료 페이지가 표시되었습니다.");
+        // 여기에 결과 애니메이션이나 추가 작업을 구현할 수 있습니다
+      }
+    </script>
+  </body>
+</html>
