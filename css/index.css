@@ -114,3 +114,17 @@ footer {
   font-size: 0.9rem;
   margin: 0;
 }
+
+.subject{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: white;
+  border:1px solid #0d8bf2;
+  border-radius:15px;
+  color: #0d8bf2;
+}
+.subject_button{
+  background-color: white;
+  border: 1px solid #777;
+  padding: 10px;
+}
