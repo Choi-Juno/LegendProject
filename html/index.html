@@ -4,98 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상식퀴즈 - 홈</title>
-    <style>
-      /* 기본 스타일 */
-      body {
-        font-family: "Noto Sans KR", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-      }
-
-      /* 헤더 스타일 */
-      header {
-        background-color: #2196f3;
-        color: white;
-        padding: 1rem;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
-
-      header h1 {
-        margin: 0;
-        font-size: 1.5rem;
-      }
-
-      /* 메인 콘텐츠 스타일 */
-      #home-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 70vh;
-      }
-
-      .mainbox {
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        text-align: center;
-        max-width: 500px;
-        width: 100%;
-      }
-
-      .mainbox h1 {
-        color: #333;
-        margin-bottom: 1rem;
-        font-size: 2rem;
-      }
-
-      .mainbox p {
-        color: #666;
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-      }
-
-      .btn-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .btn {
-        background-color: #2196f3;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
-        text-decoration: none;
-        transition: background-color 0.3s;
-        flex: 0 1 auto;
-      }
-
-      .btn:hover {
-        background-color: #0d8bf2;
-      }
-
-      /* 푸터 스타일 */
-      footer {
-        background-color: #f5f5f5;
-        padding: 1rem;
-        text-align: center;
-        margin-top: 2rem;
-        border-top: 1px solid #e0e0e0;
-      }
-
-      .cpy {
-        color: #777;
-        font-size: 0.9rem;
-        margin: 0;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="..//css/index.css" />
   </head>
   <body>
     <!-- 헤더 -->
@@ -110,16 +26,30 @@
         <p>당신의 상식을 5문제로 테스트 해봐요!</p>
         <!-- 난이도 선택 버튼들 - 클릭시 해당 난이도의 소개 페이지로 이동 -->
         <div class="btn-container">
-          <a href="difficulty.html?level=easy" class="btn">쉬움</a>
-          <a href="difficulty.html?level=normal" class="btn">보통</a>
-          <a href="difficulty.html?level=hard" class="btn">어려움</a>
+          <a href="difficulty.html?level=easy" class="btn">
+            <span class="icon-stars"><i class="fas fa-star"></i></span> 쉬움
+          </a>
+          <a href="difficulty.html?level=normal" class="btn">
+            <span class="icon-stars"
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ></span>
+            보통
+          </a>
+          <a href="difficulty.html?level=hard" class="btn">
+            <span class="icon-stars"
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i
+            ></span>
+            어려움
+          </a>
         </div>
       </div>
     </div>
 
     <!-- 푸터 -->
     <footer>
-      <p class="cpy">made by CHO</p>
+      <p class="cpy">All rights reserved. 2025 LegendTeam</p>
+      <p class="cpy">최준오, 조준혁, 박수진, 서훈성, 황인성</p>
     </footer>
   </body>
 </html>

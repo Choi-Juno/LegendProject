@@ -1,126 +1,116 @@
-/* CSS 스타일 정의 시작 */
-
-/* 사용자 정의 폰트 설정 - 'mainfont'라는 이름으로 로컬 폰트 파일 불러오기 */
-@font-face {
-  font-family: "mainfont"; /* 폰트 이름 정의 */
-  src: url("ROKAF\ Slab\ Serif\ Medium.ttf"); /* 폰트 파일 경로 */
-}
-
-/* 저작권 표시 스타일 */
-.cpy {
-  margin-top: 5%; /* 위쪽 여백 설정 */
-  font-family: "mainfont"; /* 폰트 설정 */
-  font-size: 5%; /* 글자 크기 설정 */
-}
-
-/* 문서 전체(body) 스타일 */
+/* 기본 스타일 */
 body {
-  background-color: aliceblue; /* 배경색 설정 - 엘리스블루(연한 하늘색) */
-  font-family: "mainfont"; /* 폰트 설정 */
-  font-size: 80%; /* 글자 크기 설정 */
-  text-align: center; /* 텍스트 중앙 정렬 */
-  padding: 50px; /* 내부 여백 설정 */
-  user-select: none; /* 텍스트 선택 방지 */
+  font-family: "Noto Sans KR", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
 }
 
-/* 메인 박스 스타일 - 홈 페이지와 난이도 선택 화면에 사용 */
+/* 헤더 스타일 */
+header {
+  background-color: #2196f3;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* 메인 콘텐츠 스타일 */
+#home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
 .mainbox {
-  background-color: white; /* 배경색 설정 - 흰색 */
-  padding: 5%; /* 내부 여백 설정 */
-  width: 80%; /* 너비 설정 */
-  height: 200px; /* 높이 설정 */
-  margin: auto; /* 자동 마진으로 중앙 정렬 */
-  border-radius: 10px; /* 테두리 둥글게 설정 */
-  box-shadow: 0 0 10px rgb(163, 163, 163); /* 그림자 효과 추가 */
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
 }
 
-/* 버튼 스타일 - 난이도 선택 및 홈으로 이동 버튼에 사용 */
+.mainbox h1 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.mainbox p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .btn {
-  margin: 5px; /* 외부 여백 설정 */
-  padding: 5px; /* 내부 여백 설정 */
-  background-color: rgb(131, 203, 255); /* 배경색 설정 - 밝은 파란색 */
-  border: none; /* 테두리 없음 */
-  border-radius: 5px; /* 테두리 둥글게 설정 */
-  width: 60px; /* 너비 설정 */
-  font-family: "mainfont"; /* 폰트 설정 */
-  color: rgb(255, 255, 255); /* 글자색 설정 - 흰색 */
-  cursor: pointer; /* 마우스 오버시 손가락 모양 커서 */
+  background-color: #2196f3;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  flex: 0 1 auto;
+}
+/* 아이콘 그룹 스타일 */
+.icon-stars {
+  display: inline-flex; /* 내부 아이콘들을 가로로 정렬 */
+  align-items: center;
+  /* 별들 사이에 아주 작은 간격을 주려면 아래 주석 해제 */
+  /* gap: 2px; */
 }
 
-/* 다음 문제 버튼 스타일 */
-.nxtbtn {
-  margin: auto; /* 자동 마진으로 중앙 정렬 */
-  padding: 5px; /* 내부 여백 설정 */
-  background-color: rgb(131, 203, 255); /* 배경색 설정 - 밝은 파란색 */
-  border: none; /* 테두리 없음 */
-  border-radius: 5px; /* 테두리 둥글게 설정 */
-  width: 70px; /* 너비 설정 */
-  font-family: "mainfont"; /* 폰트 설정 */
-  color: rgb(255, 255, 255); /* 글자색 설정 - 흰색 */
-  cursor: pointer; /* 마우스 오버시 손가락 모양 커서 */
+/* 만약 .icon-stars에 gap을 사용하지 않고 별들 사이에 간격을 주려면: */
+.icon-stars .fas.fa-star:not(:last-child) {
+  margin-right: 2px; /* 마지막 별을 제외한 나머지 별들의 오른쪽에 간격 */
 }
 
-/* 버튼과 정답 확인 버튼에 마우스 호버 효과 */
-button:hover,
-.ckbtn:hover {
-  background-color: rgb(
-    105,
-    189,
-    249
-  ); /* 호버시 배경색 변경 - 더 진한 파란색 */
+.btn i {
+  /* 버튼 내 개별 아이콘 스타일 */
+  font-size: 1em; /* 버튼 폰트 크기에 맞게 조정 (기존 1.1em에서 약간 줄임) */
+  color: #ffd700; /* 별 색상을 금색으로 (선택 사항) */
 }
 
-/* 퀴즈 박스 스타일 - 문제 표시에 사용 */
-.quiz-box {
-  background-color: white; /* 배경색 설정 - 흰색 */
-  padding: 5%; /* 내부 여백 설정 */
-  width: 80%; /* 너비 설정 */
-  height: 200px; /* 높이 설정 */
-  margin: auto; /* 자동 마진으로 중앙 정렬 */
-  border-radius: 10px; /* 테두리 둥글게 설정 */
-  box-shadow: 0 0 10px rgb(163, 163, 163); /* 그림자 효과 추가 */
+.btn:hover {
+  background-color: #0d8bf2;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 정답 확인 버튼 스타일 */
-.ckbtn {
-  display: inline-block; /* 인라인 블록 요소로 설정 */
-  margin: auto; /* 자동 마진으로 중앙 정렬 */
-  padding: 5px; /* 내부 여백 설정 */
-  background-color: rgb(131, 203, 255); /* 배경색 설정 - 밝은 파란색 */
-  border: none; /* 테두리 없음 */
-  border-radius: 5px; /* 테두리 둥글게 설정 */
-  width: 60px; /* 너비 설정 */
-  font-family: "mainfont"; /* 폰트 설정 */
-  font-size: 87%; /* 글자 크기 설정 */
-  color: rgb(255, 255, 255); /* 글자색 설정 - 흰색 */
-  cursor: pointer; /* 마우스 오버시 손가락 모양 커서 */
+.btn:active {
+  background-color: #0b73c7;
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-/* 체크박스 숨기기 - CSS로 체크박스를 숨기고 라벨을 대신 표시 */
-.check-box {
-  display: none; /* 화면에서 숨김 */
+/* 푸터 스타일 */
+footer {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
 }
 
-/* 정답 섹션 스타일 */
-.answer-section {
-  border-top: 1px solid rgb(149, 149, 149); /* 위쪽 테두리 설정 - 회색 */
-  padding-top: 15px; /* 위쪽 내부 여백 설정 */
+.cpy {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0;
 }
-
-/* 정답 스타일 - 초기에는 숨겨져 있음 */
-.answer {
-  display: none; /* 초기에 화면에서 숨김 */
-  background-color: white; /* 배경색 설정 - 흰색 */
-}
-
-/* 체크박스 체크시 정답 표시 - CSS 선택자로 체크박스 상태에 따라 정답 표시/숨김 */
-.check-box:checked + .ckbtn + .answer {
-  display: block; /* 체크박스가 체크되면 정답을 화면에 표시 */
-}
-
-/* hidden 클래스 - 화면에서 요소 숨기기 */
-.hidden {
-  display: none; /* 화면에서 숨김 */
-}
-
-/* CSS 스타일 정의 끝 */
