@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - LegendProject</title>
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+    <header>
+            <h1><a href="index.html">상식퀴즈</a></h1>
+    </header>
+
+    <div class="signup-container">
+        <h1>회원가입</h1>
+        <p>LegendProject에 오신 것을 환영합니다!</p>
+        <form action="/register" method="POST">
+            <div class="form-group">
+                <label for="username">사용자 아이디</label>
+                <input type="text" id="username" name="username" placeholder="아이디를 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일 주소</label>
+                <input type="email" id="email" name="email" placeholder="이메일 주소를 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호 (8자 이상)" required minlength="8">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">비밀번호 확인</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="비밀번호를 다시 입력하세요" required>
+            </div>
+            <div>
+                <button type="submit">가입하기</button>
+            </div>
+        </form>
+        <div class="links">
+            이미 계정이 있으신가요? <a href="signin.html">로그인하기</a>
+        </div>
+    </div>
+
+</body>
+</html>
