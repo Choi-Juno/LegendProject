@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - LegendProject</title>
+    <link rel="stylesheet" href="../css/signin.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">상식퀴즈</a></h1>
+        </header>
+
+    <div class="login-container">
+        <h1>로그인</h1>
+        <form action="/login" method="POST">
+            <div>
+                <label for="username">아이디 또는 이메일</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">로그인</button>
+            </div>
+        </form>
+        <div class="links">
+            <a href="#">비밀번호를 잊으셨나요?</a> | <a href="signup.html">회원가입</a>
+        </div>
+    </div>
+
+</body>
+</html>
