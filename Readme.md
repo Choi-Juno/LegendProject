@@ -18,9 +18,16 @@ LegendTeam/
 │   ├── index.html        # 홈페이지
 │   ├── difficulty.html   # 난이도 소개 페이지
 │   ├── quiz.html         # 퀴즈 페이지
-│   └── result.html       # 결과 페이지
+│   ├── result.html       # 결과 페이지
+│   ├── signin.html       # 로그인 페이지 
+│   └── signup.html       # 회원가입 페이지 
 ├── css/
-│   └── index.css         # 스타일시트
+│   ├── index.css         # 홈페이지 스타일
+│   ├── difficulty.css    # 난이도 소개 페이지 스타일
+│   ├── quiz.css          # 퀴즈 페이지 스타일
+│   ├── result.css        # 결과 페이지 스타일
+│   ├── signin.css        # 로그인 페이지 스타일 
+│   └── signup.css        # 회원가입 페이지 스타일 
 ├── js/
 │   ├── index.js          # 초기 페이지 스크립트
 │   ├── difficulty.js     # 난이도 페이지 스크립트
