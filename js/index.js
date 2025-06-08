@@ -6,6 +6,159 @@ let currentQuestionIndex = 0;
 let quizTemplateContainer = null;
 let quizTemplate = null;
 
+const labels = document.querySelectorAll(".Category");
+const subjectButton = document.querySelector(".subject_button");
+const categoryArrows = document.querySelectorAll(".category-arrow");
+const categoriesTrack = document.querySelector(".categories-track");
+
+// 카테고리 데이터
+const categories = [
+  { id: "space", name: "우주" },
+  { id: "fruit", name: "과일" },
+  { id: "general", name: "상식" },
+  { id: "science", name: "과학" },
+  { id: "history", name: "역사" },
+];
+
+// 현재 상태
+let currentCategoryIndex = 0;
+let categoriesVisible = false;
+let isAnimating = false; // 애니메이션 진행 중 플래그
+
+// DOM 요소
+const categoriesWrapper = document.querySelector(".categories-wrapper");
+
+// 카테고리 요소 생성 함수
+function createCategoryElement(category, className) {
+  const element = document.createElement("label");
+  element.className = `Category ${className}`;
+  element.textContent = category.name;
+  element.setAttribute("data-category", category.id);
+
+  // 클릭 이벤트 (현재 카테고리가 아닌 경우만)
+  if (className !== "current") {
+    element.addEventListener("click", () => {
+      if (isAnimating) return; // 애니메이션 중이면 무시
+
+      if (className === "previous") {
+        previousCategory();
+      } else if (className === "next") {
+        nextCategory();
+      }
+    });
+  }
+
+  return element;
+}
+
+// 카테고리 렌더링 (기본, 애니메이션 없음)
+function renderCategories() {
+  categoriesTrack.innerHTML = "";
+
+  const prevIndex =
+    (currentCategoryIndex - 1 + categories.length) % categories.length;
+  const nextIndex = (currentCategoryIndex + 1) % categories.length;
+
+  const prevElement = createCategoryElement(categories[prevIndex], "previous");
+  const currentElement = createCategoryElement(
+    categories[currentCategoryIndex],
+    "current"
+  );
+  const nextElement = createCategoryElement(categories[nextIndex], "next");
+
+  categoriesTrack.appendChild(prevElement);
+  categoriesTrack.appendChild(currentElement);
+  categoriesTrack.appendChild(nextElement);
+}
+
+// 애니메이션과 함께 카테고리 전환
+function animateCategories(direction) {
+  if (isAnimating) return; // 이미 애니메이션 중이면 무시
+
+  isAnimating = true;
+
+  // 1단계: 슬라이드 아웃 애니메이션
+  const outClass = direction === "left" ? "slide-left-out" : "slide-right-out";
+  const inClass = direction === "left" ? "slide-left-in" : "slide-right-in";
+
+  // 모든 애니메이션 클래스 제거
+  categoriesTrack.classList.remove(
+    "slide-left-out",
+    "slide-left-in",
+    "slide-right-out",
+    "slide-right-in"
+  );
+
+  // 슬라이드 아웃 시작
+  categoriesTrack.classList.add(outClass);
+
+  // 슬라이드 아웃 완료 후 새 요소 렌더링 및 슬라이드 인
+  setTimeout(() => {
+    // 새로운 카테고리 렌더링
+    renderCategories();
+
+    // 슬라이드 아웃 클래스 제거 후 슬라이드 인 시작
+    categoriesTrack.classList.remove(outClass);
+
+    // 다음 프레임에서 슬라이드 인 애니메이션 시작
+    requestAnimationFrame(() => {
+      categoriesTrack.classList.add(inClass);
+    });
+
+    // 슬라이드 인 완료 후 정리
+    setTimeout(() => {
+      categoriesTrack.classList.remove(inClass);
+      isAnimating = false;
+    }, 250);
+  }, 150); // 슬라이드 아웃 시간과 동일
+}
+
+// 카테고리 표시/숨김
+function showCategory() {
+  if (categoriesVisible) {
+    categoriesVisible = false;
+
+    // 사라지는 애니메이션
+    categoriesWrapper.classList.remove("visible");
+    setTimeout(() => {
+      categoriesWrapper.style.display = "none";
+    }, 300);
+  } else {
+    categoriesVisible = true;
+    categoriesWrapper.style.display = "flex";
+
+    // 나타나는 애니메이션
+    requestAnimationFrame(() => {
+      categoriesWrapper.classList.add("visible");
+    });
+
+    renderCategories(); // 첫 표시 시에는 애니메이션 없음
+  }
+}
+
+// 이전 카테고리로 이동
+function previousCategory() {
+  if (!categoriesVisible || isAnimating) return;
+
+  currentCategoryIndex =
+    (currentCategoryIndex - 1 + categories.length) % categories.length;
+  console.log(
+    `이전 카테고리로 이동: ${categories[currentCategoryIndex].name} (인덱스: ${currentCategoryIndex})`
+  );
+  animateCategories("right"); // 오른쪽에서 슬라이드 인
+}
+
+// 다음 카테고리로 이동
+function nextCategory() {
+  if (!categoriesVisible || isAnimating) return;
+
+  currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
+  console.log(
+    `다음 카테고리로 이동: ${categories[currentCategoryIndex].name} (인덱스: ${currentCategoryIndex})`
+  );
+  animateCategories("left"); // 왼쪽에서 슬라이드 인
+}
+
 // DOM 요소들 초기화 (페이지 로드 후 실행)
 function initDOMReferences() {
   // 컨테이너들
@@ -195,9 +348,6 @@ function initializeApp() {
   // DOM 요소 참조 초기화
   initDOMReferences();
 
-  // 페이지 로드 시 홈 페이지 표시
-  showHomePage();
-
   // 퀴즈 입력 폼에서 엔터키 처리
   document.addEventListener("keydown", function (event) {
     if (
@@ -213,8 +363,32 @@ function initializeApp() {
       }
     }
   });
-
-  // 마지막으로 모든 모든 복구
-  hideAllPages();
-  showHomePage();
 }
+
+// 초기화
+document.addEventListener("DOMContentLoaded", function () {
+  // 초기 상태에서는 카테고리 숨김
+  categoriesWrapper.style.display = "none";
+  categoriesWrapper.classList.remove("visible");
+  console.log("카테고리 시스템 초기화 완료");
+
+  // 화살표 버튼에 애니메이션 중복 방지 추가
+  const leftArrow = document.querySelector(".category-arrow-left");
+  const rightArrow = document.querySelector(".category-arrow-right");
+
+  leftArrow.addEventListener("click", (e) => {
+    if (isAnimating) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+
+  rightArrow.addEventListener("click", (e) => {
+    if (isAnimating) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+
+  initializeApp();
+});

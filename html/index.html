@@ -17,6 +17,9 @@
     <!-- 헤더 -->
     <header>
       <h1>상식퀴즈</h1>
+      <div class="login-container">
+        <a href="signin.html" class="login-btn">로그인</a>
+      </div>
     </header>
 
     <!-- 홈 페이지 -->
@@ -25,30 +28,28 @@
         <h1>간단 상식 퀴즈</h1>
         <p>당신의 상식을 5문제로 테스트 해봐요!</p>
         <!-- 난이도 선택 버튼들 - 클릭시 해당 난이도의 소개 페이지로 이동 -->
-        <div class="subject">
-          <button
-            type="text"
-            id="my"
-            class="subject_button"
-            onclick="showCategory()"
-          >
-            주제
-          </button>
-        </div>
         <div class="CategoryContainer">
-          <label hidden class="Category">우주</label>
-          <label hidden class="Category">과일</label>
-          <label hidden class="Category">상식</label>
+          <button class="subject_button" onclick="showCategory()">주제</button>
+          <div class="categories-wrapper">
+            <button
+              class="category-arrow category-arrow-left"
+              onclick="previousCategory()"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="categories-slider">
+              <div class="categories-track" id="categories-track">
+                <!-- 카테고리 요소들이 동적으로 생성됩니다 -->
+              </div>
+            </div>
+            <button
+              class="category-arrow category-arrow-right"
+              onclick="nextCategory()"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
-        <script>
-          const labels = document.querySelectorAll(".Category");
-          labels.forEach((label) => (label.hidden = true));
-          function showCategory() {
-            labels.forEach((label) => {
-              label.hidden = !label.hidden; // 숨김 상태 반전 (토글)
-            });
-          }
-        </script>
         <div class="btn-container">
           <a href="difficulty.html?level=easy" class="btn">
             <span class="icon-stars"><i class="fas fa-star"></i></span> 쉬움
@@ -76,5 +77,7 @@
       <p class="cpy">All rights reserved. 2025 LegendTeam</p>
       <p class="cpy">최준오, 조준혁, 박수진, 서훈성, 황인성</p>
     </footer>
+
+    <script src="../js/index.js"></script>
   </body>
 </html>
