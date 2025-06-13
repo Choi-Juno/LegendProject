@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="../css/index.css" />
   </head>
   <body>
+    <!-- 다크모드 토글 체크박스 (전역 적용용) -->
+    <input type="checkbox" id="dark-mode-toggle" class="theme-checkbox" />
+
     <!-- 헤더 -->
     <header>
       <h1>상식퀴즈</h1>
@@ -72,12 +75,22 @@
       </div>
     </div>
 
+    <!-- 다크모드 토글 (오른쪽 아래 고정) -->
+    <div class="theme-toggle-fixed">
+      <label for="dark-mode-toggle" class="theme-label">
+        <i class="fas fa-sun sun-icon"></i>
+        <i class="fas fa-moon moon-icon"></i>
+        <div class="toggle-ball"></div>
+      </label>
+    </div>
+
     <!-- 푸터 -->
     <footer>
       <p class="cpy">All rights reserved. 2025 LegendTeam</p>
       <p class="cpy">최준오, 조준혁, 박수진, 서훈성, 황인성</p>
     </footer>
 
+    <script src="../js/theme.js"></script>
     <script src="../js/index.js"></script>
   </body>
 </html>
